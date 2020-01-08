@@ -1,0 +1,13 @@
+version: '3'
+
+volumes:
+  dynamodb_data:
+services:  
+  dynamodb:
+    image: amazon/dynamodb-local
+    hostname: dynamodb-local
+    container_name: dynamodb-local
+    ports:
+      - "8042:8000"
+    volumes:
+      - dynamodb_data:/Users/billyde/xinja/code/local-setup/dynamodblocal/data
