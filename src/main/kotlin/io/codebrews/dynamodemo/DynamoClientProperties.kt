@@ -1,6 +1,5 @@
 package io.codebrews.dynamodemo
 
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider
@@ -9,14 +8,13 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient
 import java.net.URI
 
 @Configuration
-class DynamoClientProperties(@Value("\${application.dynamo.region}") private val region: String,
-                             @Value("\${application.dynamo.endpoint}") private val endpoint: String) {
+class DynamoClientProperties(private val dynamoConfigProperties: DynamoConfigProperties) {
 
     @Bean
     fun dynamoDbAsyncClient(): DynamoDbAsyncClient {
         return DynamoDbAsyncClient.builder()
-            .region(Region.of(region))
-            .endpointOverride(URI.create(endpoint))
+            .region(Region.of(dynamoConfigProperties.region))
+            .endpointOverride(URI.create(dynamoConfigProperties.endpoint))
             .credentialsProvider(DefaultCredentialsProvider.builder().build())
             .build()
     }
