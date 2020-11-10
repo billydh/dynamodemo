@@ -21,7 +21,8 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("software.amazon.awssdk:dynamodb:2.10.42")
+	implementation("software.amazon.awssdk:dynamodb")
+	implementation("software.amazon.awssdk:dynamodb-enhanced")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
@@ -30,7 +31,7 @@ dependencies {
 
 configure<DependencyManagementExtension> {
 	imports {
-		mavenBom("software.amazon.awssdk:bom:2.10.42")
+		mavenBom("software.amazon.awssdk:bom:2.15.22")
 	}
 }
 
